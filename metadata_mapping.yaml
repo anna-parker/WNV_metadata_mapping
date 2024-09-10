@@ -5,7 +5,7 @@ metadata_mapping:
   'Plate':
     loculus_name: cultureId
     description: 'An ID useful to linking to a culture, e.g. Plate7-1124'
-  'Accession':
+  'Accession #':
     loculus_name: specimenCollectorSampleId
     description: 'If there is another sample ID attached to the sequence, e.g. isolate id, it can be recorded here (nothing identifiable!)'
   'Species':
@@ -34,6 +34,6 @@ default_values:
   authorAffiliations: 'Grubaugh Lab, Yale University, CT, USA'
   sequencedByOrganization: 'Grubaugh Lab, Yale University, CT, USA'
 unused_fields:
-  - 'Strain'
+  - 'Strain #'
   - 'Site'
   - 'Virus'

@@ -1,0 +1,10 @@
+name: wnv-convert
+channels:
+  - conda-forge
+dependencies:
+  - biopython
+  - click
+  - pandas
+  - python=3.12
+  - PyYAML
+  - openpyxl
