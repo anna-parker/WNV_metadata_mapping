@@ -33,6 +33,7 @@ default_values:
   geoLocCountry: USA
   authorAffiliations: 'Grubaugh Lab, Yale University, CT, USA'
   sequencedByOrganization: 'Grubaugh Lab, Yale University, CT, USA'
+  isLabHost: False
 unused_fields:
   - 'Strain #'
   - 'Site'
