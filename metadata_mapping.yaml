@@ -1,0 +1,39 @@
+metadata_mapping:
+  'Sample Name':
+    loculus_name: submissionId
+    description: 'Your sequence identifier; should match the FASTA file header - this is used to link the metadata to the FASTA sequence'
+  'Plate':
+    loculus_name: cultureId
+    description: 'An ID useful to linking to a culture, e.g. Plate7-1124'
+  'Accession':
+    loculus_name: specimenCollectorSampleId
+    description: 'If there is another sample ID attached to the sequence, e.g. isolate id, it can be recorded here (nothing identifiable!)'
+  'Species':
+    loculus_name: hostNameScientific
+    description: 'The scientific name of the host from which the sample was collected.'
+  'Town':
+    loculus_name: geoLocCity
+    description: 'The city from which the sample was collected.'
+  'County':
+    loculus_name: geoLocAdmin2
+    description: 'A local administrative region from which the sample was collected (ex: county or municipality)'
+  'Trap Type':
+    loculus_name: collectionDevice
+    custom: "Mosquitos trapped using ${value}"
+    description: 'The instrument or container used to collect the sample e.g. swab.'
+  'Date':
+    loculus_name: sampleCollectionDate
+    description: 'The date on which the sample was collected. Please format YYYY-MM-DD - use XX if unknown, ex: 2020-03-XX or 20XX-XX-XX, and provide at least year'
+  '# Mosquitoes':
+    loculus_name: specimenProcessingDetails
+    custom: "Sample contained ${value} mosquitoes"
+    description: 'Detailed information regarding the processing applied to a sample during or after receiving the sample.'
+default_values:
+  geoLocAdmin1: Connecticut
+  geoLocCountry: USA
+  authorAffiliations: 'Grubaugh Lab, Yale University, CT, USA'
+  sequencedByOrganization: 'Grubaugh Lab, Yale University, CT, USA'
+unused_fields:
+  - 'Strain'
+  - 'Site'
+  - 'Virus'
