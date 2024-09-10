@@ -34,6 +34,6 @@ python convert_metadata_fields.py --input all_successfully_sequenced.xlsx --outp
 
 ## Questions
 
-1. Are the default values and mappings in the metadata_mapping.yaml accurate?
+1. Are the default values and mappings in the metadata_mapping.yaml accurate? I assumed `date` was the `sampleCollectionDate` is this true? Do you have a mapping of your sites to latitude-longitude or zip-codes, as currently I am unable to map the data to a Loculus field.
 2. Do you have any information on the sequencingInstrument and sequencingProtocol used? This is not mandatory but is desired by INSDC. Also if you have details on authors or sequencedByContactName that would be great to give the data more attribution.
 3. We will use your institution as your center name in ENA, please let us know if you would like to still modify this value. Center name is used by ENA as an identifier to facilitate the recognition and attribution of your sequences within the INSDC. It is important because if at any point in time Pathoplexus no longer exists and you need to modify your data you can use the center name to identify your group and request sequence revision.

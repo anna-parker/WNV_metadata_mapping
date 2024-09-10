@@ -9,6 +9,7 @@ class Config:
     metadata_mapping: dict[str, dict[str, str]]
     default_values: dict[str, str]
     unused_fields: list[str]
+    taxon_id_map: dict[str, str]
 
 
 @click.command()
@@ -40,6 +41,9 @@ def map_fields(config_file, input, output):
             if pd.notnull(value)
             else None
         )
+    df["hostTaxonId"] = df["hostNameScientific"].apply(
+        lambda x: config.taxon_id_map.get(x, None)
+    )
 
     df.to_csv(output, sep="\t", index=False)
 

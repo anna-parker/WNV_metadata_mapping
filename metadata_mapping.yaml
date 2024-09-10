@@ -37,3 +37,17 @@ unused_fields:
   - 'Strain #'
   - 'Site'
   - 'Virus'
+taxon_id_map:
+  'Culex pipiens': 7175
+  'Culex restuans': 38742
+  'Culex salinarius': 38743
+  'Culiseta morsitans': 329107
+  'Aedes albopictus': 7160
+  'Culiseta melanura': 329109
+  'Ochlerotatus canadensis': 228917
+  'Ochlerotatus triseriatus': 7162
+  'Ochlerotatus japonicus': 140438
+  'Coquillettidia perturbans': 329111
+  'Ochlerotatus taeniorhynchus': 329105
+  'Psorophora ferox': 7183
+  'Aedes cinereus': 120872
