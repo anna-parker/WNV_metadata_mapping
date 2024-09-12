@@ -5,7 +5,7 @@ This script transforms metadata according to `metadata_mapping.yaml` into the fo
 The script performs the following transformations:
 
 1. sets default values for some Loculus metadata fields (values in `default_values`)
-2. drops fields without a Loculus equivalent (fields in `unused_fields`)
+2. drops fields without a Loculus equivalent (fields in `fields_to_drop`)
 3. maps metadata fields in `metadata_mapping` to their closest equivalent loculus metadata field (defined in `loculus_name`), if the `custom` subfield is specified the metadata values will be additionally modified, e.g.
 
 ```
@@ -16,6 +16,8 @@ The script performs the following transformations:
 ```
 
 will map `Trap Type: Light Trap` to `collectionDevice: Mosquitos trapped using Light Trap`.
+
+4. Constructs some loculus metadata fields using a more complicated option-based mapping (in `option_based_mapping`), i.e. if field X is equal to a set loculus field Y to b.
 
 ## Installation
 
