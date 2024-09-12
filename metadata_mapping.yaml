@@ -1,10 +1,27 @@
-metadata_mapping:
+default_values:
+  geoLocAdmin1: Connecticut
+  geoLocCountry: USA
+  authorAffiliations: 'Grubaugh Lab, Yale University, CT, USA'
+  sequencedByOrganization: 'Grubaugh Lab, Yale University, CT, USA'
+  isLabHost: False
+  collectionMethod: 'mosquito trapping'
+  sequencingProtocol: 'COVIDSeq protocol (primers switched)'
+  ampliconPcrPrimerScheme: 'WNVUS1'
+  ampliconSize: '400bp'
+  rawSequenceDataProcessingMethod: 'iVar v1.3.1'
+  consensusSequenceSoftwareName: 'iVar'
+  consensusSequenceSoftwareVersion: 'v1.3.1'
+  qualityControlMethodName: 'iVar trim'
+  qualityControlMethodVersion: 'v1.3.1'
+  depthOfCoverage: 10
+  sequencedByContactName: 'Nicole M Feriancek'
+  authors: 'Nicole M Feriancek, Mallery I Breban, Ellie Bourgikos, Angela Bransfield, Philip M Armstrong, Chantal B.F. Vogels, Nathan D Grubaugh'
+  sampleType: 'pooled blended mosquitoes'
+  purposeOfSampling: 'surveillance for arboviruses'
+metadata_mapping: #Mapping from csv columns to loculus fields
   'Sample Name':
     loculus_name: submissionId
     description: 'Your sequence identifier; should match the FASTA file header - this is used to link the metadata to the FASTA sequence'
-  'Plate':
-    loculus_name: cultureId
-    description: 'An ID useful to linking to a culture, e.g. Plate7-1124'
   'Accession #':
     loculus_name: specimenCollectorSampleId
     description: 'If there is another sample ID attached to the sequence, e.g. isolate id, it can be recorded here (nothing identifiable!)'
@@ -26,29 +43,41 @@ metadata_mapping:
     description: 'The date on which the sample was collected. Please format YYYY-MM-DD - use XX if unknown, ex: 2020-03-XX or 20XX-XX-XX, and provide at least year'
   '# Mosquitoes':
     loculus_name: specimenProcessingDetails
-    custom: "Sample contained ${value} mosquitoes"
+    custom: "Sample consisted of ${value} whole, blended mosquitoes from a given trap pooled in groups of up to 50 by species and date"
     description: 'Detailed information regarding the processing applied to a sample during or after receiving the sample.'
-default_values:
-  geoLocAdmin1: Connecticut
-  geoLocCountry: USA
-  authorAffiliations: 'Grubaugh Lab, Yale University, CT, USA'
-  sequencedByOrganization: 'Grubaugh Lab, Yale University, CT, USA'
-  isLabHost: False
-unused_fields:
+option_based_mapping: #More complicated creation of loculus fields from csv fields
+  sequencingDate:
+    - field: 'Plate'
+      map:
+        WNV_P01: 2024-01-09
+        WNV_P02: 2024-01-16
+        WNV_P03: 2024-01-23
+        WNV_P04: 2024-01-29
+        WNV_P05: 2024-02-06
+        WNV_P06: 2024-02-12
+        WNV_P07: 2024-02-19
+    - field: 'Sample Name' # overrides 'Plate' mapping
+      start: Yale-WNV0653
+      end: Yale-WNV0660
+      value: 2024-05-14
+  taxonId:
+    - field: 'Species'
+      map:
+        'Culex pipiens': 7175
+        'Culex restuans': 38742
+        'Culex salinarius': 38743
+        'Culiseta morsitans': 329107
+        'Aedes albopictus': 7160
+        'Culiseta melanura': 329109
+        'Ochlerotatus canadensis': 228917
+        'Ochlerotatus triseriatus': 7162
+        'Ochlerotatus japonicus': 140438
+        'Coquillettidia perturbans': 329111
+        'Ochlerotatus taeniorhynchus': 329105
+        'Psorophora ferox': 7183
+        'Aedes cinereus': 120872
+fields_to_drop:
   - 'Strain #'
-  - 'Site'
   - 'Virus'
-taxon_id_map:
-  'Culex pipiens': 7175
-  'Culex restuans': 38742
-  'Culex salinarius': 38743
-  'Culiseta morsitans': 329107
-  'Aedes albopictus': 7160
-  'Culiseta melanura': 329109
-  'Ochlerotatus canadensis': 228917
-  'Ochlerotatus triseriatus': 7162
-  'Ochlerotatus japonicus': 140438
-  'Coquillettidia perturbans': 329111
-  'Ochlerotatus taeniorhynchus': 329105
-  'Psorophora ferox': 7183
-  'Aedes cinereus': 120872
+  - 'Site'
+  - 'Plate'
