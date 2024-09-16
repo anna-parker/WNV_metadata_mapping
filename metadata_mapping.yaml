@@ -76,6 +76,12 @@ option_based_mapping: #More complicated creation of loculus fields from csv fiel
         'Ochlerotatus taeniorhynchus': 329105
         'Psorophora ferox': 7183
         'Aedes cinereus': 120872
+  geoLocLatitude:
+    - field: 'Site'
+      function: 'get_latitude'
+  geoLocLongitude:
+    - field: 'Site'
+      function: 'get_longitude'
 fields_to_drop:
   - 'Strain #'
   - 'Virus'

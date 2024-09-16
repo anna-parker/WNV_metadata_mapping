@@ -2,6 +2,8 @@ import pandas as pd
 from dataclasses import dataclass
 import click
 import yaml
+import csv
+import re
 
 
 @dataclass
@@ -10,6 +12,52 @@ class Config:
     default_values: dict[str, str]
     fields_to_drop: list[str]
     option_based_mapping: dict[str, list[dict[str, str]]]
+
+
+def dms_to_dd(degree_str, minutes_str):
+    # Split into degrees, minutes and direction
+    parts = degree_str.split("°")
+    degrees = float(parts[0].strip())
+    minutes, direction = minutes_str.split("'")
+
+    minutes = float(minutes.strip())
+    decimal_degrees = degrees + (minutes / 60)
+
+    # If the direction is South or West, the decimal degrees should be negative
+    if direction.strip() in ["S", "W"]:
+        decimal_degrees = -decimal_degrees
+
+    return decimal_degrees
+
+
+def get_latitude(site, site_map_dict):
+    lat_long_str = site_map_dict.get(site, None)
+    lat_long_str = re.sub(r"\s+", " ", lat_long_str)
+    latitude = dms_to_dd(lat_long_str.split(" ")[0], lat_long_str.split(" ")[1])
+    return latitude
+
+
+def get_longitude(site, site_map_dict):
+    lat_long_str = site_map_dict.get(site, None)
+    lat_long_str = re.sub(r"\s+", " ", lat_long_str)
+    longitude = dms_to_dd(lat_long_str.split(" ")[2], lat_long_str.split(" ")[3])
+    return longitude
+
+
+def get_site_map():
+    result_dict = {}
+
+    # Open the TSV file and read its content
+    with open("site_to_lat_long.tsv", mode="r", newline="", encoding="utf-8") as file:
+        reader = csv.reader(file, delimiter="\t")
+        for row in reader:
+            # Assuming each row has at least two columns
+            key = row[0]
+            value = row[1]
+            # Map the first column to the second column
+            result_dict[key] = value
+
+    return result_dict
 
 
 @click.command()
@@ -22,6 +70,7 @@ def map_fields(config_file, input, output):
         relevant_config = {key: full_config[key] for key in Config.__annotations__}
         config = Config(**relevant_config)
     df = pd.read_excel(input)
+    site_map_dict = get_site_map()
 
     # Create loculus fields using option-based map
     # if multiple options exist, later options override previous ones
@@ -33,6 +82,15 @@ def map_fields(config_file, input, output):
                     df[loculus_field] = df[item["field"]].apply(
                         lambda x: item["map"].get(x, None)
                     )
+                elif "function" in item:
+                    if item["function"] == "get_latitude":
+                        df[loculus_field] = df[item["field"]].apply(
+                            lambda x: get_latitude(x, site_map_dict)
+                        )
+                    elif item["function"] == "get_longitude":
+                        df[loculus_field] = df[item["field"]].apply(
+                            lambda x: get_longitude(x, site_map_dict)
+                        )
                 else:
                     df[loculus_field] = df[item["field"]].apply(
                         lambda x: item["value"]
