@@ -33,3 +33,14 @@ And then converting data in the excel file with the script:
 ```
 python convert_metadata_fields.py --input all_successfully_sequenced.xlsx --output "converted_metadata.tsv" --config-file metadata_mapping.yaml
 ```
+
+How to get a subsample of the data, e.g. sequence 03:
+
+```
+i=3
+metadata_row=$((i + 1))
+fasta_header=$((2*i -1))
+fasta_seq=$((2*i))
+sed -n "1p;${metadata_row}p" results/converted_metadata.tsv > wnv_submission$i.tsv
+sed -n "${fasta_header}p;${fasta_seq}p" results/All_CT_sequenced_WNV.fasta > wnv_submission$i.fasta
+```
