@@ -60,7 +60,7 @@ option_based_mapping: #More complicated creation of loculus fields from csv fiel
       start: Yale-WNV0653
       end: Yale-WNV0660
       value: 2024-05-14
-  taxonId:
+  hostTaxonId:
     - field: 'Species'
       map:
         'Culex pipiens': 7175
