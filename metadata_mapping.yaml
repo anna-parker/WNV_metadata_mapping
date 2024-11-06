@@ -15,7 +15,7 @@ default_values:
   qualityControlMethodVersion: 'v1.3.1'
   depthOfCoverage: 10
   sequencedByContactName: 'Nicole M Feriancek'
-  authors: 'Nicole M Feriancek, Mallery I Breban, Ellie Bourgikos, Angela Bransfield, Philip M Armstrong, Chantal B.F. Vogels, Nathan D Grubaugh'
+  authors: 'Feriancek, Nicole M.; Breban, Mallery I.; Bourgikos, Ellie; Bransfield, Angela; Armstrong, Philip M.; Vogels, Chantal B.F.; Grubaugh, Nathan D.'
   sampleType: 'pooled blended mosquitoes'
   purposeOfSampling: 'surveillance for arboviruses'
 metadata_mapping: #Mapping from csv columns to loculus fields

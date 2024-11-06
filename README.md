@@ -31,7 +31,7 @@ micromamba activate wnv-convert
 And then converting data in the excel file with the script:
 
 ```
-python convert_metadata_fields.py --input all_successfully_sequenced.xlsx --output "converted_metadata.tsv" --config-file metadata_mapping.yaml
+python convert_metadata_fields.py --input all_successfully_sequenced.xlsx --output "results/converted_metadata.tsv" --config-file metadata_mapping.yaml
 ```
 
 How to get a subsample of the data, e.g. sequence 03:
